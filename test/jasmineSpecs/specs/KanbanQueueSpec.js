@@ -6,15 +6,17 @@ var jasmine={};jasmine.createSpy=function(){};if(_prevJasmine){jasmine=_prevJasm
 /*aptana support*/
 
 describe('KanbanQueue', function () {
-	var testItem = KanbanQueue({name:'Request',items: []});
+	var testItem = new KanbanQueue({Name:'Request',Items: []});
 	
 	it('initializes itself when instantiated with an object',function(){
-		var locItem = KanbanQueue({name:'Request',items: []});
+		var locItem = new KanbanQueue({Name:'Request',Items: []});
 		expect(locItem.getName()).toEqual('Request');
 		expect(locItem.getItems()).toEqual([]);
 	});
 	
 	it('has a name',function(){
+		var compare = testItem.getName();
+		
 		expect(testItem.getName()).toEqual('Request');
 	});
 	
@@ -23,14 +25,14 @@ describe('KanbanQueue', function () {
 	});
 	
 	it('accepts work items',function(){
-		var locItem = KanbanQueue({name:'Request',items: []});
+		var locItem = new KanbanQueue({Name:'Request',Items: []});
 		var mockWork = {};
 		locItem.acceptWork(mockWork);
 		expect(locItem.getItems().indexOf(mockWork)).not.toBe(-1);
 	});
 	
 	it('takes subscriptions to its "ItemAdded" event',function(){
-		var locItem = KanbanQueue({name:'Request',items: []});
+		var locItem = new KanbanQueue({Name:'Request',Items: []});
 
 		expect(function(){
 			locItem.subscribeItemAdded(function(){});
@@ -39,7 +41,7 @@ describe('KanbanQueue', function () {
 	
 	
 	it('raises "ItemAdded" event containing itself and the new item when a work item is accepted',function(){
-		var locItem = KanbanQueue({name:'Request',items: []});
+		var locItem = new KanbanQueue({Name:'Request',Items: []});
 		var spyHandler = jasmine.createSpy();
 
 		expect(function(){

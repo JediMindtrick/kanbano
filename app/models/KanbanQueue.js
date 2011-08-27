@@ -1,3 +1,4 @@
+/*
 var KanbanQueue = function(passedObj){
 	var constructor = function(obj){
 		var toReturn = {};
@@ -31,3 +32,36 @@ var KanbanQueue = function(passedObj){
 	
 	return constructor(passedObj);
 };
+*/
+
+var KanbanQueue = Backbone.Model.extend({
+
+	defaults: {
+    	"Items":  [],
+		"Name":   '',
+		"ItemAddedHandlers": []
+  	},
+
+  	getItems: function(){
+  		return this.get('Items');
+  	},
+
+  	getName: function(){
+  		return this.get('Name');
+  	},
+
+	
+  	acceptWork: function(item){
+  		this.get('Items').push(item);
+		
+		var handlers = this.get('ItemAddedHandlers');
+		
+		for(var i = 0, l = handlers.length; i < l; i++){
+			handlers[i](this, item);
+		}
+	},
+
+	subscribeItemAdded: function (handler){
+		this.get('ItemAddedHandlers').push(handler);
+	}
+});

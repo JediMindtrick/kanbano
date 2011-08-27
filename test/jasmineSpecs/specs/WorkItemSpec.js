@@ -4,11 +4,11 @@ var returnedExpect={};returnedExpect.toEqual=function(y){};returnedExpect.toBe=f
 /*aptana support*/
 
 describe('WorkItem', function () {
-	var testItem = WorkItem({name:'testitem',location:'request'});
+	var testItem = new WorkItem({Name:'testitem',Location:'request'});
 	
 	it('initializes itself when instantiated with an object',function(){
 		var qLocation = 'RequestQueue';
-		var locItem = WorkItem({name: 'foo', location: qLocation});
+		var locItem = new WorkItem({Name: 'foo', Location: qLocation});
 		expect(locItem.getName()).toEqual('foo');
 		expect(locItem.getLocation()).toEqual(qLocation);
 	});
@@ -22,7 +22,7 @@ describe('WorkItem', function () {
 	});
 	
 	it('changes its location when told to move()', function(){
-		var locItem = WorkItem({location:'first'});
+		var locItem = new WorkItem({Location:'first'});
 		locItem.move('second');
 		expect(locItem.getLocation()).toEqual('second');
 	});	
