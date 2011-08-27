@@ -5,22 +5,27 @@
   <title>Jasmine Spec Runner: Jasmine Core</title>
 
   <link rel="shortcut icon" type="image/png" href="./jasmine_favicon.png">
-
   <link href="css/jasmine.css" rel="stylesheet"/>
+  
+  <!--jasmine scripts-->
   <script type="text/javascript" src="js/jasmine.js"></script>
   <script type="text/javascript">
     // yes, really keep this here to keep us honest, but only for jasmine's own runner! [xw]
     undefined = "diz be undefined yo";
   </script>
-
-
-  <!-- include source files here... -->
+  <!-- reporters... -->
   <script type="text/javascript" src="js/TrivialReporter.js"></script>
   <script type="text/javascript" src="js/ConsoleReporter.js"></script>
+  <!--end jasmine scripts-->
+  
+  
+  <!-- include source files here... -->
   <script src="../../js/WorkItem.js" type="text/javascript"></script>
+  <script src="../../js/KanbanQueue.js" type="text/javascript"></script>
 
   <!-- include spec files here... -->
   <script src="specs/WorkItemSpec.js" type="text/javascript"></script>
+  <script src="specs/KanbanQueueSpec.js" type="text/javascript"></script>
 
   <script type="text/javascript">
     (function() {
