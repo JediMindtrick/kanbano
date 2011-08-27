@@ -35,17 +35,16 @@ describe('KanbanQueue', function () {
 		var locItem = new KanbanQueue({Name:'Request',Items: []});
 
 		expect(function(){
-			locItem.subscribeItemAdded(function(){});
+			locItem.bind('ItemAdded',function(){});
 		}).not.toThrow();
 	});
-	
 	
 	it('raises "ItemAdded" event containing itself and the new item when a work item is accepted',function(){
 		var locItem = new KanbanQueue({Name:'Request',Items: []});
 		var spyHandler = jasmine.createSpy();
 
 		expect(function(){
-			locItem.subscribeItemAdded(spyHandler);
+			locItem.bind('ItemAdded',spyHandler);
 		}).not.toThrow();
 		
 		var mockWork = {};

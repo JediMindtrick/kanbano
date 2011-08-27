@@ -50,18 +50,9 @@ var KanbanQueue = Backbone.Model.extend({
   		return this.get('Name');
   	},
 
-	
   	acceptWork: function(item){
   		this.get('Items').push(item);
-		
-		var handlers = this.get('ItemAddedHandlers');
-		
-		for(var i = 0, l = handlers.length; i < l; i++){
-			handlers[i](this, item);
-		}
-	},
-
-	subscribeItemAdded: function (handler){
-		this.get('ItemAddedHandlers').push(handler);
+  		
+		this.trigger('ItemAdded',this,item);
 	}
 });
