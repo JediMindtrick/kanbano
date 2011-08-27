@@ -1,8 +1,8 @@
 =======
 **This is my humble attempt at a kanban for software**
 
-I have read numerous books on lean manufacturing, sorta 'tabula rasa', but only a few articles on lean software development.
-So this is my take on applying *one* of the principles of lean thinking, which is to make work visible.
+I have read numerous books on lean manufacturing, but only a few articles on lean software development.
+So this is my take on applying *one* of the principles of lean thinking, sorta 'tabula rasa', which is to make work visible.
 
 It's also a chance for me to learn more about, and practice BDD.
 
