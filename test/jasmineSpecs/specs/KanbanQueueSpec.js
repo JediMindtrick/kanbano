@@ -1,12 +1,15 @@
 /*aptana support*/
+
 var _prevSpec=null;if(jasmine){_prevSpec=expect;}
-var returnedExpect={};returnedExpect.toEqual=function(y){};returnedExpect.toBe=function(y){};returnedExpect.toMatch=function(pattern){};returnedExpect.toBeDefined=function(){};returnedExpect.toBeUndefined=function(){};returnedExpect.toBeNull=function(){};returnedExpect.toBeTruthy=function(){};returnedExpect.toBeFalsy=function(){};returnedExpect.toContain=function(y){};returnedExpect.toBeLessThan=function(y){};returnedExpect.toBeGreaterThan=function(y){};returnedExpect.toThrow=function(e){};var expect=function(){return returnedExpect;};if(jasmine){expect=_prevSpec;}
+var returnedExpect={};returnedExpect.toEqual=function(y){};returnedExpect.toBe=function(y){};returnedExpect.toMatch=function(pattern){};returnedExpect.toBeDefined=function(){};returnedExpect.toBeUndefined=function(){};returnedExpect.toBeNull=function(){};returnedExpect.toBeTruthy=function(){};returnedExpect.toBeFalsy=function(){};returnedExpect.toContain=function(y){};returnedExpect.toBeLessThan=function(y){};returnedExpect.toBeGreaterThan=function(y){};returnedExpect.toThrow=function(e){};returnedExpect.toHaveBeenCalled=function(){};returnedExpect.toHaveBeenCalled=function(){};returnedExpect.toHaveBeenCalledWith=function(arguments){};returnedExpect.not=returnedExpect;var expect=function(){return returnedExpect;};if(jasmine){expect=_prevSpec;}
+var _prevJasmine=null;if(jasmine){_prevJasmine=jasmine;}
+var jasmine={};jasmine.createSpy=function(){};if(_prevJasmine){jasmine=_prevJasmine;}
 /*aptana support*/
 
 describe('KanbanQueue', function () {
 	var testItem = KanbanQueue({name:'Request',items: []});
 	
-	it('will initialize itself when instantiated with an object',function(){
+	it('initializes itself when instantiated with an object',function(){
 		var locItem = KanbanQueue({name:'Request',items: []});
 		expect(locItem.getName()).toEqual('Request');
 		expect(locItem.getItems()).toEqual([]);
@@ -20,7 +23,45 @@ describe('KanbanQueue', function () {
 		expect(testItem.getItems()).toEqual([]);
 	});
 	
-	it('will accept work items',function(){
+	it('accepts work items',function(){
+		var locItem = KanbanQueue({name:'Request',items: []});
+		var mockWork = {};
+		locItem.acceptWork(mockWork);
+		expect(locItem.getItems().indexOf(mockWork)).not.toBe(-1);
+	});
+	
+	it('takes subscriptions to its "ItemAdded" event',function(){
+		var locItem = KanbanQueue({name:'Request',items: []});
+
+		expect(function(){
+			locItem.subscribeItemAdded(function(){});
+		}).not.toThrow();
+	});
+	
+	
+	/*
+	  it('should spy on Klass#methodWithCallback', function() {
+    var callback = jasmine.createSpy();
+    new Klass().methodWithCallback(callback);
+
+    expect(callback).toHaveBeenCalledWith('foo');
+  });
+	 * */
+	
+	it('raises "ItemAdded" event containing itself and the new item when a work item is accepted',function(){
+		var locItem = KanbanQueue({name:'Request',items: []});
+		var spyHandler = jasmine.createSpy();
+
+		expect(function(){
+			locItem.subscribeItemAdded(spyHandler);
+		}).not.toThrow();
 		
+		var mockWork = {};
+		locItem.acceptWork(mockWork);
+		
+		expect(spyHandler).toHaveBeenCalledWith(locItem,mockWork);
+
+		expect(locItem.getItems().length).toBe(1);		
+		expect(locItem.getItems().indexOf(mockWork)).not.toBe(-1);
 	});
 });

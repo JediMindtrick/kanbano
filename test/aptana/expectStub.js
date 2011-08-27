@@ -32,7 +32,15 @@ returnedExpect.toBeLessThan = function(y){}; //passes if x is less than y
 
 returnedExpect.toBeGreaterThan = function(y){}; //passes if x is greater than y
 
-returnedExpect.toThrow = function(e){}; 
+returnedExpect.toThrow = function(e){};
+
+returnedExpect.toHaveBeenCalled = function(){}; 
+
+returnedExpect.toHaveBeenCalled = function (){};// passes if x is a spy and was called
+
+returnedExpect.toHaveBeenCalledWith = function(arguments){};// passes if x is a spy and was called with the specified arguments
+
+returnedExpect.not = returnedExpect;
 
 var expect = function(){
 	return returnedExpect;
