@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ramble Runner</title>
+    <title>Kanbano Features</title>
     <meta name="author" content="Jamie Hill" />
     <link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
     <!--[if lte IE 8]><script type="text/javascript" src="js/html5.js"></script><![endif]-->
@@ -18,7 +18,7 @@
       $(document).ready(function() {
       	var myCache = CacheOutputter();
       	ramble.outputter.push(myCache);
-        ramble.init({ speed : "slow" });
+        ramble.init({ speed : "fast" });
         ramble.loadFeatureFile('work_moves_through_queues.feature');
         var xmlDisplayed = false;
         ramble.onEnd = function () {
@@ -44,7 +44,7 @@
       <h1><span>Ramble</span>Runner</h1>
     </header>
 
-    <section id="controls">sty
+    <section id="controls">
     	<p><a href='/kanbano/Default.html'>Home</a></p>
     	<p><a href='/kanbano/test/Index.html'>Testing</a></p>
       <p>Eventually there will be controls here to play/stop features as well as picking which features to run etc. 

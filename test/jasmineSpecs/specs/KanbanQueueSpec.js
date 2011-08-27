@@ -1,5 +1,4 @@
 /*aptana support*/
-
 var _prevSpec=null;if(jasmine){_prevSpec=expect;}
 var returnedExpect={};returnedExpect.toEqual=function(y){};returnedExpect.toBe=function(y){};returnedExpect.toMatch=function(pattern){};returnedExpect.toBeDefined=function(){};returnedExpect.toBeUndefined=function(){};returnedExpect.toBeNull=function(){};returnedExpect.toBeTruthy=function(){};returnedExpect.toBeFalsy=function(){};returnedExpect.toContain=function(y){};returnedExpect.toBeLessThan=function(y){};returnedExpect.toBeGreaterThan=function(y){};returnedExpect.toThrow=function(e){};returnedExpect.toHaveBeenCalled=function(){};returnedExpect.toHaveBeenCalled=function(){};returnedExpect.toHaveBeenCalledWith=function(arguments){};returnedExpect.not=returnedExpect;var expect=function(){return returnedExpect;};if(jasmine){expect=_prevSpec;}
 var _prevJasmine=null;if(jasmine){_prevJasmine=jasmine;}
@@ -38,15 +37,6 @@ describe('KanbanQueue', function () {
 		}).not.toThrow();
 	});
 	
-	
-	/*
-	  it('should spy on Klass#methodWithCallback', function() {
-    var callback = jasmine.createSpy();
-    new Klass().methodWithCallback(callback);
-
-    expect(callback).toHaveBeenCalledWith('foo');
-  });
-	 * */
 	
 	it('raises "ItemAdded" event containing itself and the new item when a work item is accepted',function(){
 		var locItem = KanbanQueue({name:'Request',items: []});

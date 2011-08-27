@@ -36,6 +36,8 @@ returnedExpect.toThrow = function(e){};
 
 returnedExpect.toHaveBeenCalled = function(){}; 
 
+/*
+ */
 returnedExpect.toHaveBeenCalled = function (){};// passes if x is a spy and was called
 
 returnedExpect.toHaveBeenCalledWith = function(arguments){};// passes if x is a spy and was called with the specified arguments
