@@ -26,17 +26,33 @@ ramble.match(/^I have a piece of work in a queue$/, function() {
 	ramble.retryOnFailWithinMilliseconds = ms;
 	Kanbano = getApp();
 	
-  	/*Simulate loading a workflow for right now...*/
+	
+	Kanbano.Model.ValueStreams['TestValueStream'] = null;
+  	/*Load a value stream into the model*/
+  	
+  	//first queue
 	var testWork = new Kanbano.Model.WorkItem({Name:"TestWork",Location:"TestRequestQueue"});
 	var testQueue = new Kanbano.Model.KanbanQueue({Name:'TestRequestQueue'});
-	var workflow = Kanbano.Model.Workflows['TestWorkflow'] = [];
-		
-	workflow.push(testQueue);
 	testQueue.acceptWork(testWork);
+
+	//second queue
+	var testQueue2 = new Kanbano.Model.KanbanQueue({Name:'TestInProgressQueue'});
+	testQueue2.set({'Items':[]});
 	
-	new Kanbano.Views.KanbanQueuesIndex(workflow);
+	//value stream
+	var testStream = new Kanbano.Model.ValueStream({Name:'TestValueStream'});
+
+	//add queues to the value stream	
+	var queues = testStream.getQueues();
+	queues.push(testQueue);
+	queues.push(testQueue2);
+	
+	//add value stream into the model
+	Kanbano.Model.ValueStreams['TestValueStream'] = testStream;
+	
+	var foo = new Kanbano.Views.KanbanQueuesIndex(testStream);
   
-	Assert.areEqual(1,this.find('#TestQueue #TestWork').length);
+	Assert.areEqual(1,this.find('#TestRequestQueue #TestWork').length);
 });
 
 ramble.match(/^the location of the work is not in the last queue$/, function() {

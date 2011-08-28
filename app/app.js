@@ -2,7 +2,7 @@ Kanbano = {
     Views: {},
     Controllers: {},
     Model: {
-    	Workflows: {}
+    	ValueStreams: {}
     },
     Resources: {},
     init: function() {

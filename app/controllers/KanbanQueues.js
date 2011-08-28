@@ -2,7 +2,6 @@ Kanbano.Controllers.KanbanQueues = Backbone.Router.extend({
     routes: {
     	"": "index",
         "view/:workflow": "index",
-        //"addItem/:queue/i:item":"addItem"
         "addItem/:queue/:item":"addItem"
     },
     
@@ -11,7 +10,7 @@ Kanbano.Controllers.KanbanQueues = Backbone.Router.extend({
     },
     
     index: function(workflowId) {    
- 		var workflow = Kanbano.Model.Workflows[workflowId];
+ 		var workflow = Kanbano.Model.ValueStreams[workflowId];
     	
     	new Kanbano.Views.KanbanQueuesIndex(workflow);
     }

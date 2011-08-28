@@ -2,8 +2,7 @@ var KanbanQueue = Backbone.Model.extend({
 
 	defaults: {
     	"Items":  [],
-		"Name":   '',
-		"ItemAddedHandlers": []
+		"Name":   ''
   	},
 
   	getItems: function(){
@@ -20,6 +19,7 @@ var KanbanQueue = Backbone.Model.extend({
   		
 		this.trigger('ItemAdded',this,item);
 	}
+	
 });
 
 Kanbano.Model.KanbanQueue = KanbanQueue;

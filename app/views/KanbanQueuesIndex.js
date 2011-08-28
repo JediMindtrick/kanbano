@@ -4,20 +4,29 @@ Kanbano.Views.KanbanQueuesIndex = Backbone.View.extend({
         this.render(model);
     },
     
-    render: function(model) {
+    render: function(valueStream) {
+    	$('#appContainer').html('');
     	var toAdd = ''; 
     	
-    	if(model != undefined){
-	    	toAdd = '<div id="TestQueue" class="kanbanqueue">'
+    	if(valueStream != undefined){
+    		var queueCount = valueStream.getQueues().length;
+    		
+    		$.each(valueStream.getQueues(),function(index,queue){
+    			
+    			/*Each kanban queue*/
+    			toAdd += '<div id="' + queue.getName() + '" class="kanbanqueue">'
 					 	+ '<h3>Request</h3>';
-					 	
-			$.each(model[0].getItems(),function(index,item){
-				toAdd += '<div id="' + item.getName() + '" class="workItem">' + item.getName();
-			});
-	
-			toAdd	+= 			'</div>' +  
-						'</div>';
-	
+			
+				var itemCount = queue.getItems().length;		 	
+				$.each(queue.getItems(),function(index,item){
+					toAdd += '<div id="' + item.getName() + '" class="workItem">' + item.getName();
+				});
+		
+				toAdd	+= 			'</div>' +  
+							'</div>';
+							
+    		});
+    		
 			toAdd += '<a href="#addItem/request/5">Add Item</a>';
 		}    	
 		else{
