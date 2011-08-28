@@ -1,16 +1,18 @@
-Kanbano.Controllers = Kanbano.Controllers || {};
-
 Kanbano.Controllers.KanbanQueues = Backbone.Router.extend({
     routes: {
     	"": "index",
         "view/:workflow": "index",
-        "addItem/:queue/i:item":"addItem"
+        //"addItem/:queue/i:item":"addItem"
+        "addItem/:queue/:item":"addItem"
     },
     
     addItem: function(queueId,itemId){
+    	$('#appContainer').html('addItem controller');
+    	/*
     	if(Kanbano.Model.Queues.indexOf(queueId) != -1){
     		var locQueue = Kanbano.Model.Queues[queueId]; 
     	}
+    	*/
     },
     
     index: function(workflowId) {

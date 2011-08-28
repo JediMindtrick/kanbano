@@ -3,7 +3,7 @@ var Assert =  YUITest.Assert;
 
 ramble.match(/^I have a piece of work in a queue$/, function() {
   // code
-  this.visit('/kanbano/app/Index.html');
+  this.visit('/kanbano/app.html');
   var ms = 5000;
   ramble.retryOnFailWithinMilliseconds = ms;
   
@@ -12,7 +12,6 @@ ramble.match(/^I have a piece of work in a queue$/, function() {
 
 ramble.match(/^the location of the work is not in the last queue$/, function() {
   // code
-  
 });
 
 ramble.match(/^I advance the work$/, function() {

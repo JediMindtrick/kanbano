@@ -1,9 +1,3 @@
-/**
- * @author brandon
- */
-Kanbano.Views = Kanbano.Views || {};
-
-
 Kanbano.Views.KanbanQueuesIndex = Backbone.View.extend({
     initialize: function(model) {
         this.documents = this.options.documents;
@@ -22,7 +16,8 @@ Kanbano.Views.KanbanQueuesIndex = Backbone.View.extend({
 
 		toAdd	+= 			'</div>' +  
 					'</div>';
-    	
+
+	toAdd += '<a href="#addItem/request/5">click here</a>';    	
     	$('#appContainer').html(toAdd);
     }
 });

@@ -14,18 +14,22 @@
 		<!--<meta name="viewport" content="width=device-width; initial-scale=1.0" />-->
 		
 		<!--3rd party dependencies-->
-	    <script src="../vendor/js/json2.js"></script>
-	    <script src="../vendor/js/jquery-1.6.2.min.js"></script>
-	    <script src="../vendor/js/underscore-min.js"></script>
-	    <script src="../vendor/js/backbone.js"></script>	    
+	    <script src="vendor/js/json2.js"></script>
+	    <script src="vendor/js/jquery-1.6.2.min.js"></script>
+	    <script src="vendor/js/underscore-min.js"></script>
+	    <script src="vendor/js/backbone.js"></script>	    
 	    <!--<script src="../backbone-localstorage.js"></script>-->
 	    
 	    <!--application-->
-	    <script src="app.js"></script>
+	    <script src="app/app.js"></script>
+	    <script src="app/models/KanbanQueue.js"></script>
+	    <script src="app/models/WorkItem.js"></script>
+	    <script src="app/controllers/KanbanQueues.js"></script>
+	    <script src="app/views/KanbanQueuesIndex.js"></script>
 
 	</head>
 	<body>
-		<a href="../Default.html">Home</a>
+		<a href="Default.html">Home</a>
 		<div id="Status">Loading</div>
 		<div id="appContainer">
 			<!--Starts in the idea pen-->	
