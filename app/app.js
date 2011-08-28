@@ -1,4 +1,4 @@
-var Kanbano = {
+Kanbano = {
     Views: {},
     Controllers: {},
     Model: {
@@ -7,6 +7,6 @@ var Kanbano = {
     Resources: {},
     init: function() {
         new Kanbano.Controllers.KanbanQueues();
-		var started = Backbone.history.start({pushState: false, root: "/kanbano/app/"});
+		var started = Backbone.history.start({pushState: false, root: "/kanbano/"});
     }
 };

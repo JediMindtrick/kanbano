@@ -17,3 +17,5 @@ var WorkItem = Backbone.Model.extend({
   	return this.set({Location : newLoc});
   }
 });
+
+Kanbano.Model.WorkItem = WorkItem;

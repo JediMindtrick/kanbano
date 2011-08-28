@@ -4,8 +4,9 @@ Feature: Work moves through queues
   I want for work to progress through queues according to business rules
 
 Scenario: Work goes forward through the queues
-  Given I have a piece of work in a queue
-  pending And the location of the work is not in the last queue
+  Given the application is loaded 
+  And I have a piece of work in a queue
+  And the location of the work is not in the last queue
   pending When I advance the work
   pending Then the work will move into the next queue
   pending And the work will no longer exist in the old queue
