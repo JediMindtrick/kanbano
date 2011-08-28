@@ -67,6 +67,7 @@ ramble.match(/^the location of the work is not in the last queue$/, function() {
 
 ramble.match(/^I advance the work$/, function() {
   // code
+  	this.find('#TestWork button.Next').click();
 });
 
 ramble.match(/^the work will move into the next queue$/, function() {
