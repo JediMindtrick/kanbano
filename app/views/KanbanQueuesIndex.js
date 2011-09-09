@@ -14,16 +14,19 @@ Kanbano.Views.KanbanQueuesIndex = Backbone.View.extend({
     		$.each(valueStream.getQueues(),function(index,queue){
     			
     			/*Each kanban queue*/
-    			toAdd += '<div id="' + queue.getName() + '" class="kanbanqueue">'
-					 	+ '<h3>Request</h3>';
+    			toAdd += '<div id="' + queue.getName() + '" class="kanbanqueue">';
+				toAdd += 	'<h3>' + queue.getName() + '</h3>';
 			
 				var itemCount = queue.getItems().length;		 	
 				$.each(queue.getItems(),function(index,item){
-					toAdd += '<div id="' + item.getName() + '" class="workItem">' + item.getName();
+					toAdd += '<div id="' + item.getName() + '" class="workItem">' 
+								+ item.getName();				
+						toAdd += '<button class="Next">Next</ button>';
+					toAdd +=  '</div>'
 				});
 		
-				toAdd	+= 			'</div>' +  
-							'</div>';
+		
+				toAdd += '</div>';
 							
     		});
     		
@@ -34,5 +37,6 @@ Kanbano.Views.KanbanQueuesIndex = Backbone.View.extend({
 		}
 		
     	$('#appContainer').html(toAdd);
+    	$('button').button();
     }
 });
