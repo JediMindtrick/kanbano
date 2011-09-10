@@ -1,0 +1,26 @@
+.queue{
+	height: 300px;
+}
+
+.queue .title,.status,.item{
+	text-align: center;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+.queue .status,.item,.items{
+	border: dotted black 1px;
+}
+
+.queue .status,.item{
+	font-size: 14px;
+}
+
+.queue .items{
+	height: 300px;
+}
+
+.item button{
+	font-size: 10px;
+	float: right;
+}
