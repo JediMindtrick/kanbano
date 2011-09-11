@@ -33,12 +33,6 @@
 	    <script src="app/controllers/KanbanQueues.js"></script>
 	    <script src="app/views/KanbanQueuesIndex.js"></script>
 
-		<script type="text/x-jquery-tmpl">
-			{{each WorkItems}}
-						<div id="${$value.ID}" class="item">${$value.Title}</div>
-					{{/each}}
-		</script>
-
 		<script id="queueTemplate" type="text/x-jquery-tmpl">
 			
 		    <div id="${ID}" class="grid_2 queue">

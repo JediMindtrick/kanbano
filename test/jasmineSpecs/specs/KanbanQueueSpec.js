@@ -55,4 +55,25 @@ describe('KanbanQueue', function () {
 		expect(locItem.getItems().length).toBe(1);		
 		expect(locItem.getItems().indexOf(mockWork)).not.toBe(-1);
 	});
+	
+	it('raises "ItemRemoved" event containing itself and the old item when a work item is removed',function(){
+		var locItem = new KanbanQueue({Name:'Request',Items: []});
+		var spyHandler = jasmine.createSpy();
+
+		expect(function(){
+			locItem.bind('ItemRemoved',spyHandler);
+		}).not.toThrow();
+		
+		var mockWork = {Name:'TestWork', getName: function(){return 'TestWork';}};
+		locItem.acceptWork(mockWork);
+		
+		expect(locItem.getItems().length).toBe(1);	
+		
+		locItem.removeWork(mockWork.Name);
+		
+		expect(spyHandler).toHaveBeenCalledWith(locItem,mockWork.Name);
+
+		expect(locItem.getItems().length).toBe(0);		
+		expect(locItem.getItems().indexOf(mockWork)).toBe(-1);
+	});
 });

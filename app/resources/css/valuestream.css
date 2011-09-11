@@ -6,6 +6,7 @@
 	text-align: center;
 	padding-bottom: 10px;
 	padding-top: 10px;
+	word-wrap: break-word;
 }
 
 .queue .status,.item,.items{

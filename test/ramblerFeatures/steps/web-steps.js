@@ -1,6 +1,7 @@
 // Matchers should throw an error when they get an unexpected result.
 var Assert =  YUITest.Assert;
 var Kanbano = null;
+var startQueueId = null;
 
 var getApp = function(){
 	var toReturn = document.getElementById('browser').contentWindow.Kanbano;
@@ -29,9 +30,12 @@ ramble.match(/^I have a piece of work in a queue$/, function() {
 	
 	Kanbano.Model.ValueStreams['TestValueStream'] = null;
   	/*Load a value stream into the model*/
-  	
+  	  	
+	//value stream
+	var testStream = new Kanbano.Model.ValueStream({Name:'TestValueStream'});
+
   	//first queue
-	var testWork = new Kanbano.Model.WorkItem({Name:"TestWork",Location:"TestRequestQueue"});
+	var testWork = new Kanbano.Model.WorkItem({Name:"TestWork",Location:"TestRequestQueue",ValueStream: testStream});
 	var testQueue = new Kanbano.Model.KanbanQueue({Name:'TestRequestQueue'});
 	testQueue.acceptWork(testWork);
 
@@ -39,9 +43,6 @@ ramble.match(/^I have a piece of work in a queue$/, function() {
 	var testQueue2 = new Kanbano.Model.KanbanQueue({Name:'TestInProgressQueue'});
 	testQueue2.set({'Items':[]});
 	
-	//value stream
-	var testStream = new Kanbano.Model.ValueStream({Name:'TestValueStream'});
-
 	//add queues to the value stream	
 	var queues = testStream.getQueues();
 	queues.push(testQueue);
@@ -60,9 +61,11 @@ ramble.match(/^the location of the work is not in the last queue$/, function() {
 	ramble.retryOnFailWithinMilliseconds = ms;
 	Kanbano = getApp();
   
-  	var lastQueueId = this.find('.kanbanqueue:last').attr('id');
-  	var itemQueueId = this.find('#TestWork').closest('.kanbanqueue').attr('id');
+  	var lastQueueId = this.find('.queue:last').attr('id');
+  	var itemQueueId = this.find('#TestWork').closest('.queue').attr('id');
  	Assert.areNotEqual(lastQueueId,itemQueueId);
+ 	
+ 	startQueueId = itemQueueId;
 });
 
 ramble.match(/^I advance the work$/, function() {
@@ -72,8 +75,15 @@ ramble.match(/^I advance the work$/, function() {
 
 ramble.match(/^the work will move into the next queue$/, function() {
   // code
+  	var next = this.find('#' + startQueueId).next('.queue').attr('id');
+  	var itemLocation = this.find('#TestWork').closest('.queue').attr('id');
+  	
+  	Assert.areEqual(next,itemLocation);
 });
 
 ramble.match(/^the work will no longer exist in the old queue$/, function() {
   // code
+  	var itemLocation = this.find('#TestWork').closest('.queue').attr('id');
+  	
+  	Assert.areNotEqual(startQueueId,itemLocation);
 });

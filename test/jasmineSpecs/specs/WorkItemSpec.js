@@ -22,8 +22,30 @@ describe('WorkItem', function () {
 	});
 	
 	it('changes its location when told to move()', function(){
-		var locItem = new WorkItem({Location:'first'});
+		var streamSpy = {};
+		
+		var fromQueue = { removeWork: function(){} };
+		spyOn(fromQueue,'removeWork').andReturn(true);
+		
+		var toQueue = { acceptWork: function(){} };
+		spyOn(toQueue,'acceptWork').andReturn(true);
+				
+		var locItem = new WorkItem({Location:'first',ValueStream:streamSpy});
+		streamSpy.getQueue = function(id){
+			if(id == 'first'){
+				return fromQueue;
+			}
+			else{
+				return toQueue;
+			}
+		};
+		
+		//act
 		locItem.move('second');
+		
+		//assert
 		expect(locItem.getLocation()).toEqual('second');
+		expect(toQueue.acceptWork).toHaveBeenCalled();
+		expect(fromQueue.removeWork).toHaveBeenCalled();
 	});	
 });

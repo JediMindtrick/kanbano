@@ -15,9 +15,42 @@ var KanbanQueue = Backbone.Model.extend({
 
 	/*Whenever the queue gets new work items, we want to know about it.*/
   	acceptWork: function(item){
-  		this.get('Items').push(item);
+  		var toReturn = false;
   		
-		this.trigger('ItemAdded',this,item);
+  		try{
+  			this.get('Items').push(item);
+  		
+			this.trigger('ItemAdded',this,item);
+			
+			toReturn = true;
+		}
+		catch(ex){
+			//for now, swallow the exception
+		}
+		
+		return toReturn;
+	},
+	
+	removeWork: function(id){
+		var toReturn = false;
+  		
+  		try{
+			var items = this.get('Items');
+			//find the item by id and remove it...also raising an event
+			for(var i = 0, k = items.length; i < k; i++){
+				if(items[i].getName() == id){
+					items.splice(i,1);
+					this.trigger('ItemRemoved',this,id);
+				}
+			}
+			
+			toReturn = true;
+		}
+		catch(ex){
+			//for now, swallow the exception
+		}
+		
+		return toReturn;
 	}
 	
 });

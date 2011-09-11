@@ -2,7 +2,8 @@ var WorkItem = Backbone.Model.extend({
 
   defaults: {
     "Location":  '',
-    "Name":     ''
+    "Name":     '',
+    "ValueStream": {}
   },
   
   getLocation: function(){
@@ -14,7 +15,20 @@ var WorkItem = Backbone.Model.extend({
   },
 
   move: function(newLoc){
-  	return this.set({Location : newLoc});
+  	//if it's in the last queue, newLoc will equal "WorkComplete"
+  	//handle that here
+  	
+  	//get the queue
+  	var valueStream = this.get('ValueStream');
+  	var newQ = valueStream.getQueue(newLoc);
+  	//try to put the work into the queue
+  	if(newQ.acceptWork(this))
+  	{
+  		var oldQ = valueStream.getQueue(this.get('Location'));
+  		oldQ.removeWork(this.getName());
+	  	//on success change it's location
+  		this.set({Location : newLoc});
+  	}
   }
 });
 
