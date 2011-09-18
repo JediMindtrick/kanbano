@@ -6,10 +6,10 @@ var jasmine={};jasmine.createSpy=function(){};if(_prevJasmine){jasmine=_prevJasm
 /*aptana support*/
 
 describe('ValueStream',function(){
-	var testStream = new ValueStream({Name:'TestValueStream'});
+	var testStream = new ValueStream(null, {Name:'TestValueStream'});
 	
 	it('initializes itself when instantiated with an object',function(){
-		var locItem = new ValueStream({Name:'LocStream'});
+		var locItem = new ValueStream(null, {Name:'LocStream'});
 		expect(locItem.getName()).toEqual('LocStream');
 	});
 	
@@ -19,26 +19,26 @@ describe('ValueStream',function(){
 		expect(testStream.getName()).toEqual('TestValueStream');
 	});
 	
-	it('has a list of queues',function(){
-		expect(testStream.getQueues()).toEqual([]);
-	});
-	
 	it("returns a work item when given it's id",function(){
+		var locStream = new ValueStream(null, {Name:'LocStream'});
+		
 		//arrange
 		var testWork = new Kanbano.Model.WorkItem({Name:"TestWork",Location:"TestRequestQueue"});
-		var testQueue = new Kanbano.Model.KanbanQueue({Name:'TestRequestQueue'});
+		var testQueue = new Kanbano.Model.KanbanQueue(null, {Name:'TestRequestQueue'});
 		testQueue.acceptWork(testWork);
-		testStream.getQueues().push(testQueue);
 		
-		var returned = testStream.getWorkItem('TestWork');
+		locStream.add(testQueue);
+		
+		var returned = locStream.getWorkItem('TestWork');
 		
 		expect(returned).toBe(testWork);
 	});
 	
 	it("returns a queue when given it's id",function(){
 		//arrange
-		var testQueue = new Kanbano.Model.KanbanQueue({Name:'TestQueue2'});
-		testStream.getQueues().push(testQueue);
+		var testQueue = new Kanbano.Model.KanbanQueue([], {Name:'TestQueue2'});
+		
+		testStream.add(testQueue);
 		
 		var returned = testStream.getQueue('TestQueue2');
 		

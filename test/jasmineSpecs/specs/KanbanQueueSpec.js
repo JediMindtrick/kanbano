@@ -6,12 +6,17 @@ var jasmine={};jasmine.createSpy=function(){};if(_prevJasmine){jasmine=_prevJasm
 /*aptana support*/
 
 describe('KanbanQueue', function () {
-	var testItem = new KanbanQueue({Name:'Request',Items: []});
+	var testItem = new KanbanQueue([], {Name:'Request'});
 	
 	it('initializes itself when instantiated with an object',function(){
-		var locItem = new KanbanQueue({Name:'Request',Items: []});
+		var locItem = new KanbanQueue([],{Name: 'Request'});
+		//var locItem = new KanbanQueue({Name:'Request',Items: []});
+		//expect(locItem.get('Name')).toEqual('Request');
+		//expect(locItem.models).toEqual([]);
+		expect(locItem.length).toEqual(0);
 		expect(locItem.getName()).toEqual('Request');
-		expect(locItem.getItems()).toEqual([]);
+		//expect(locItem.getItems()).toEqual([]);
+		
 	});
 	
 	it('has a name',function(){
@@ -20,19 +25,24 @@ describe('KanbanQueue', function () {
 		expect(testItem.getName()).toEqual('Request');
 	});
 	
+	/*
 	it('has a list of items',function(){
 		expect(testItem.getItems()).toEqual([]);
 	});
+	*/
 	
 	it('accepts work items',function(){
-		var locItem = new KanbanQueue({Name:'Request',Items: []});
-		var mockWork = {};
+		//var locItem = new KanbanQueue({Name:'Request',Items: []});
+		var locItem = new KanbanQueue([], {Name:'Request'});
+		var mockWork = new WorkItem({Name: "testWork"});
 		locItem.acceptWork(mockWork);
-		expect(locItem.getItems().indexOf(mockWork)).not.toBe(-1);
+		//expect(locItem.getItems().indexOf(mockWork)).not.toBe(-1);
+		expect(locItem.models.indexOf(mockWork)).not.toBe(-1);
+		
 	});
 	
 	it('takes subscriptions to its "ItemAdded" event',function(){
-		var locItem = new KanbanQueue({Name:'Request',Items: []});
+		var locItem = new KanbanQueue([], {Name:'Request',Items: []});
 
 		expect(function(){
 			locItem.bind('ItemAdded',function(){});
@@ -40,40 +50,42 @@ describe('KanbanQueue', function () {
 	});
 	
 	it('raises "ItemAdded" event containing itself and the new item when a work item is accepted',function(){
-		var locItem = new KanbanQueue({Name:'Request',Items: []});
+		var locItem = new KanbanQueue([], {Name:'Request',Items: []});
 		var spyHandler = jasmine.createSpy();
 
 		expect(function(){
 			locItem.bind('ItemAdded',spyHandler);
 		}).not.toThrow();
 		
-		var mockWork = {};
+		var mockWork = new WorkItem({Name:'TestWork'});
 		locItem.acceptWork(mockWork);
 		
+		expect(spyHandler).toHaveBeenCalled();
 		expect(spyHandler).toHaveBeenCalledWith(locItem,mockWork);
 
-		expect(locItem.getItems().length).toBe(1);		
-		expect(locItem.getItems().indexOf(mockWork)).not.toBe(-1);
+		expect(locItem.length).toBe(1);		
+		expect(locItem.at(0).get('Name')).toBe('TestWork');
+		expect(locItem.models.indexOf(mockWork)).not.toBe(-1);
 	});
 	
 	it('raises "ItemRemoved" event containing itself and the old item when a work item is removed',function(){
-		var locItem = new KanbanQueue({Name:'Request',Items: []});
+		var locItem = new KanbanQueue([], {Name:'Request',Items: []});
 		var spyHandler = jasmine.createSpy();
 
 		expect(function(){
 			locItem.bind('ItemRemoved',spyHandler);
 		}).not.toThrow();
 		
-		var mockWork = {Name:'TestWork', getName: function(){return 'TestWork';}};
+		var mockWork = new WorkItem({Name:'TestWork'});
 		locItem.acceptWork(mockWork);
 		
-		expect(locItem.getItems().length).toBe(1);	
+		expect(locItem.models.length).toBe(1);	
 		
-		locItem.removeWork(mockWork.Name);
+		locItem.removeWork(mockWork.getName());
 		
-		expect(spyHandler).toHaveBeenCalledWith(locItem,mockWork.Name);
+		expect(spyHandler).toHaveBeenCalledWith(locItem,mockWork.getName());
 
-		expect(locItem.getItems().length).toBe(0);		
-		expect(locItem.getItems().indexOf(mockWork)).toBe(-1);
+		expect(locItem.length).toBe(0);		
+		expect(locItem.models.indexOf(mockWork)).toBe(-1);
 	});
 });

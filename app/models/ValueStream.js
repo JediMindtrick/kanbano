@@ -1,25 +1,35 @@
-var ValueStream = Backbone.Model.extend({
-
-	defaults: {
-    	"Queues":  [],
-		"Name":   ''
+//var ValueStream = Backbone.Model.extend({
+var ValueStream = Backbone.Collection.extend({
+	model: KanbanQueue,
+ 	localStorage: new Store("Streams"),
+ 	
+ 	initialize: function(coll,options){
+  		if(options != undefined && options.Name != undefined){
+  			this.Name = options.Name;	
+  		}
   	},
+
+	Name: '',
 
   	getQueues: function(){
   		return this.get('Queues');
   	},
 
   	getName: function(){
-  		return this.get('Name');
+  		return this.Name;
   	},
   	
   	getWorkItem: function(id){
   		var toReturn = null;
   		
-  		var queues = this.get('Queues');
+  		var queues = this.models;
+  		
   		//each queue
   		for(var i = 0, k = queues.length; i < k; i++){
-  			var items = queues[i].getItems()
+  			var queue = queues[i];
+  			
+  			var items = queue.models;
+  			
   			//each item in the queue
   			for(var j = 0, o = items.length; j < o; j++){
   				//id *should* be unique!!! need a way to ensure this...
@@ -37,11 +47,16 @@ var ValueStream = Backbone.Model.extend({
   	getQueue: function(id){
   		var toReturn = null;
   		
-  		var queues = this.get('Queues');
+  		//var queues = this.get('Queues');
+  		var queues = this.models;
+  		
   		//each queue
   		for(var i = 0, k = queues.length; i < k; i++){
-  			if(queues[i].getName() == id){
-  				toReturn = queues[i];
+  			var queue = queues[i];
+  			var name = queue.getName();
+  			if(name == id){
+  				//toReturn = queues[i];
+  				toReturn = this.at(i);
   				break;
   			}
   		}
