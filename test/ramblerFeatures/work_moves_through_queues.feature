@@ -11,6 +11,11 @@ Scenario: Work goes forward through the queues
   Then the work will move into the next queue
   And the work will no longer exist in the old queue
 
+Scenario: Work can be added to the valuestream
+  Given the application is loaded 
+  When I add a new item to the value stream
+  Then the work start in the first queue
+
 #Scenario: Work starts in the idea pen
 #  Given context
 #  When event
