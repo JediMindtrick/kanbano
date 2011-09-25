@@ -32,7 +32,7 @@ Kanbano = {
 		//add value stream into the model
 		Kanbano.Model.ValueStreams['DefaultValueStream'] = defaultStream;
 		
-		var foo = new Kanbano.Views.KanbanQueuesIndex(defaultStream);
+		(new Kanbano.Views.KanbanQueuesIndex(defaultStream));
 		
     }
 };

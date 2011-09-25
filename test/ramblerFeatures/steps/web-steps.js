@@ -88,3 +88,7 @@ ramble.match(/^the work will no longer exist in the old queue$/, function() {
   	
   	Assert.areNotEqual(startQueueId,itemLocation);
 });
+
+ramble.match(/^I click to add a new item$/, function() {
+  // code
+});

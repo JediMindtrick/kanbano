@@ -13,8 +13,10 @@ Scenario: Work goes forward through the queues
 
 Scenario: Work can be added to the valuestream
   Given the application is loaded 
-  When I add a new item to the value stream
-  Then the work start in the first queue
+  When I click to add a new item
+  And I give the item a name
+  And I click 'Add'
+  Then the work starts in the first queue
 
 #Scenario: Work starts in the idea pen
 #  Given context
