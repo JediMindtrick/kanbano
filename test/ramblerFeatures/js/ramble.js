@@ -293,7 +293,9 @@ Ramble.Runner =  {
 	        //this.outputter.start();
 	        if (!this.iframe) {
 	            Ramble.Context.iframe = $('<iframe id="browser" />').appendTo(this.workspaceSelector);
-	            Ramble.Context.iframe.css({ width: 500, height: 300 });
+	            //Ramble.Context.iframe.css({ width: 500, height: 300 });
+	            Ramble.Context.iframe.css('width','100%');
+	            Ramble.Context.iframe.css('height','100%');
 	            Ramble.Context.iframe
 	            	.load(function() {
 		                Ramble.Runner.pageLoading = false;

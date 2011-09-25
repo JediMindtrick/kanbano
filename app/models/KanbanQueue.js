@@ -10,6 +10,7 @@ var KanbanQueue = Backbone.Collection.extend({
   	},
   	
 	Name : '',
+	
   	getName: function(){
   		return this.Name;
   	},
