@@ -14,6 +14,9 @@ var KanbanQueue = Backbone.Collection.extend({
   		return this.Name;
   	},
   	
+  	getItems: function(){
+  		return this.models;
+  	},
 
 	/*Whenever the queue gets new work items, we want to know about it.*/
   	acceptWork: function(item){

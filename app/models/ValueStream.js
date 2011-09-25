@@ -11,9 +11,11 @@ var ValueStream = Backbone.Collection.extend({
 
 	Name: '',
 
+	/*
   	getQueues: function(){
   		return this.get('Queues');
   	},
+  	*/
 
   	getName: function(){
   		return this.Name;

@@ -27,26 +27,27 @@ ramble.match(/^I have a piece of work in a queue$/, function() {
 	ramble.retryOnFailWithinMilliseconds = ms;
 	Kanbano = getApp();
 	
-	
 	Kanbano.Model.ValueStreams['TestValueStream'] = null;
   	/*Load a value stream into the model*/
   	  	
 	//value stream
-	var testStream = new Kanbano.Model.ValueStream({Name:'TestValueStream'});
+	var testStream = new Kanbano.Model.ValueStream(null,{Name:'TestValueStream'});
 
   	//first queue
 	var testWork = new Kanbano.Model.WorkItem({Name:"TestWork",Location:"TestRequestQueue",ValueStream: testStream});
-	var testQueue = new Kanbano.Model.KanbanQueue({Name:'TestRequestQueue'});
+	var testQueue = new Kanbano.Model.KanbanQueue([],{Name:'TestRequestQueue'});
 	testQueue.acceptWork(testWork);
 
 	//second queue
-	var testQueue2 = new Kanbano.Model.KanbanQueue({Name:'TestInProgressQueue'});
-	testQueue2.set({'Items':[]});
+	var testQueue2 = new Kanbano.Model.KanbanQueue([],{Name:'TestInProgressQueue'});
 	
 	//add queues to the value stream	
-	var queues = testStream.getQueues();
-	queues.push(testQueue);
-	queues.push(testQueue2);
+	//var queues = testStream.getQueues();
+	//queues.push(testQueue);
+	//queues.push(testQueue2);
+	
+	testStream.add(testQueue);
+	testStream.add(testQueue2);
 	
 	//add value stream into the model
 	Kanbano.Model.ValueStreams['TestValueStream'] = testStream;

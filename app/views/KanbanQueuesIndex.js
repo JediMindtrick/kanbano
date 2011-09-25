@@ -10,9 +10,13 @@ Kanbano.Views.KanbanQueuesIndex = Backbone.View.extend({
     	var self = this;
     	
     	if(valueStream != undefined){
+    		var myQueues = valueStream.models;
     		//template rendering
-    		$('#queueTemplate').tmpl(valueStream.getQueues())
+    		//$('#queueTemplate').tmpl(valueStream.getQueues())
+	    	//	.appendTo('#appContainer');
+	    	$('#queueTemplate').tmpl(myQueues)
 	    		.appendTo('#appContainer');
+	    	
 			//handlers, wiring, etc. here
 			$('button').button();
 			$('.item button').click(function(){
